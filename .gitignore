@@ -22,3 +22,6 @@ typechain-types
 cache
 artifacts
 
+/.key.*
+/.tmp.*
+/old/

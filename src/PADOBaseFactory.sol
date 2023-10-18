@@ -26,16 +26,16 @@ abstract contract PADOBaseFactory {
     }
 
     function mineDeploy(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry, uint256 startSalt) public returns (address) {
-        bytes32 salt = mineSalt(poolManager, startSalt);
+        bytes32 salt = mineSalt(poolManager, iEasPrxoy, eas, schemaKyc, schemaCountry, startSalt);
         return deploy(poolManager, iEasPrxoy, eas, schemaKyc, schemaCountry, salt);
     }
 
-    function mineSalt(IPoolManager poolManager, uint256 startSalt) public view returns (bytes32 salt) {
+    function mineSalt(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry, uint256 startSalt) public view returns (bytes32 salt) {
         uint256 endSalt = uint256(startSalt) + 1000;
         unchecked {
             for (uint256 i = startSalt; i < endSalt; ++i) {
                 salt = bytes32(i);
-                address hookAddress = _computeHookAddress(poolManager, salt);
+                address hookAddress = _computeHookAddress(poolManager, iEasPrxoy, eas, schemaKyc, schemaCountry, salt);
                 // console.log("Testing salt %s for address %s", i, hookAddress);
 
                 if (_isPrefix(hookAddress)) {
@@ -47,15 +47,15 @@ abstract contract PADOBaseFactory {
         }
     }
 
-    function _computeHookAddress(IPoolManager poolManager, bytes32 salt) internal view returns (address) {
-        bytes32 hash = keccak256(abi.encodePacked(bytes1(0xff), address(this), salt, _hashBytecode(poolManager)));
+    function _computeHookAddress(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry, bytes32 salt) internal view returns (address) {
+        bytes32 hash = keccak256(abi.encodePacked(bytes1(0xff), address(this), salt, _hashBytecode(poolManager, iEasPrxoy, eas, schemaKyc, schemaCountry)));
         return address(uint160(uint256(hash)));
     }
 
     /// @dev The implementing contract must override this function to return the bytecode hash of its contract
     /// For example, the CounterHook contract would return:
     /// bytecodeHash = keccak256(abi.encodePacked(type(CounterHook).creationCode, abi.encode(poolManager)));
-    function _hashBytecode(IPoolManager poolManager) internal pure virtual returns (bytes32 bytecodeHash);
+    function _hashBytecode(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry) internal pure virtual returns (bytes32 bytecodeHash);
 
     function _isPrefix(address _address) internal view returns (bool) {
         // zero out all but the first byte of the address
