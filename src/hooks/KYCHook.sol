@@ -60,9 +60,9 @@ contract KYCHook is BaseHook, IHookFeeManager, Ownable {
         IPoolManager.ModifyPositionParams calldata,
         bytes calldata
     ) external override returns (bytes4 selector) {
-        if(!_checkKycResult(sender)) {
+        /*if(!_checkKycResult(sender)) {
             revert NOKYC();
-        }
+        }*/
         emit BeforeModify(sender);
         selector = BaseHook.beforeModifyPosition.selector;
     }
@@ -72,9 +72,9 @@ contract KYCHook is BaseHook, IHookFeeManager, Ownable {
         override
         returns (bytes4 selector)
     {
-        if(!_checkKycResult(sender)) {
+        /*if(!_checkKycResult(sender)) {
             revert NOKYC();
-        }
+        }*/
         emit BeforeSwap(sender);
         selector = BaseHook.beforeSwap.selector;
     }
