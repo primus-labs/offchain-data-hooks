@@ -10,7 +10,7 @@ import { IEAS } from "./IEAS.sol";
 import { IEASProxy} from "./IEASProxy.sol";
 import { Attestation, EMPTY_UID, uncheckedInc } from "./Common.sol";
 
-contract KYCHook is BaseHook, Ownable {
+contract KYCHook is BaseHook, IHookFeeManager, Ownable {
     error NOKYC();
     error RestrictedCountry();
 
@@ -41,6 +41,18 @@ contract KYCHook is BaseHook, Ownable {
             afterDonate: false
         });
     }
+
+    /// @notice The interface for setting a fee on swap or fee on withdraw to the hook
+    /// @dev This callback is only made if the Fee.HOOK_SWAP_FEE_FLAG or Fee.HOOK_WITHDRAW_FEE_FLAG in set in the pool's key.fee.
+    function getHookFees(PoolKey calldata) external pure returns (uint24 fee) {
+        // Swap fee is upper bits.
+        // 20% fee as 85 = hex55 which is 5 in both directions. 1/5 = 20%
+        // Withdraw fee is lower bits
+        // 33% fee as 51 = hex33 which is 3 in both directions. 1/3 = 33%
+        fee = 0x5533;
+    }
+
+    function getHookWithdrawFee(PoolKey calldata key) external view returns (uint8 fee) {}
 
     function beforeModifyPosition(
         address sender,
