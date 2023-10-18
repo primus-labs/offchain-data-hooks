@@ -6,7 +6,8 @@
   "scripts": {
     "compile": "forge build",
     "deploy:deployTokens": "npx hardhat run --network sepolia scripts/deployTokens.js",
-    "clean": "rm -rf lcov.info coverage artifacts cache_hardhat cache out typechain-types"
+    "clean": "rm -rf lcov.info coverage artifacts cache_hardhat cache out typechain-types",
+    "deploy:deployByHardhat": "npx hardhat run --network sepolia scripts/deployByHardhat.js"
   },
   "keywords": [],
   "author": "",
