@@ -10,6 +10,7 @@ import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import { IEAS } from "./IEAS.sol";
 import { IEASProxy} from "./IEASProxy.sol";
 import { Attestation, EMPTY_UID, uncheckedInc } from "./Common.sol";
+import {PADOBaseFactory} from "../PADOBaseFactory.sol";
 
 contract KYCHook is BaseHook, IHookFeeManager, Ownable {
     error NOKYC();
@@ -115,5 +116,25 @@ contract KYCHook is BaseHook, IHookFeeManager, Ownable {
     }
     function getSchemaCountry() external view returns (bytes32) {
         return _schemaCountry;
+    }
+}
+
+contract KYCFactory is PADOBaseFactory {
+    constructor()
+        PADOBaseFactory(
+            address(
+                uint160(
+                    Hooks.BEFORE_MODIFY_POSITION_FLAG | Hooks.BEFORE_SWAP_FLAG
+                )
+            )
+        )
+    {}
+
+    function deploy(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry, bytes32 salt) public override returns (address) {
+        return address(new KYCHook{salt: salt}(poolManager, iEasPrxoy, eas, schemaKyc, schemaCountry));
+    }
+
+    function _hashBytecode(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry) internal pure override returns (bytes32 bytecodeHash) {
+        bytecodeHash = keccak256(abi.encodePacked(type(KYCHook).creationCode, abi.encode(poolManager), abi.encode(iEasPrxoy), abi.encode(eas), schemaKyc, schemaCountry));
     }
 }
