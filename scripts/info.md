@@ -22,9 +22,10 @@ token0, token1 approve ok
 
 ## kyc hook
 Contract KYCFactory deployed at: 0x376A6b8CEA5021bDcEb6b346dA5C2e7aED177f1d
-
+KYC hook contact address at: 0x28D51025C34cc1023078D5fE16Dd8d6Da81A7BBC
 
 ## create pool
+
 
 ## add liquidity
 

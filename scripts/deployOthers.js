@@ -51,12 +51,14 @@ async function main() {
     const contractKYCFactoryAddress = contractKYCFactory.target;
     console.log("Contract KYCFactory deployed at:", contractKYCFactoryAddress);
     
+
+    //const contractKYCFactoryAddress = "0x376A6b8CEA5021bDcEb6b346dA5C2e7aED177f1d";
     const KYCFactoryContract = await ethers.getContractAt("KYCFactory", contractKYCFactoryAddress);
     const iEasPrxoy="0xb53F5BcB421B0aE0f0d2a16D3f7531A8d00f63aC";
     const eas="0xC2679fBD37d54388Ce493F1DB75320D236e1815e";
     const schemaKyc="0x5f868b117fd34565f3626396ba91ef0c9a607a0e406972655c5137c6d4291af9";
     const schemaCountry="0x5f868b117fd34565f3626396ba91ef0c9a607a0e406972655c5137c6d4291af9";
-    const kychooks = KYCFactoryContract.mineDeploy(poolManagerAddress, iEasPrxoy, eas, schemaKyc, schemaCountry);
+    const kychooks = await KYCFactoryContract.mineDeploy(poolManagerAddress, iEasPrxoy, eas, schemaKyc, schemaCountry);
     console.log('kychooks=', kychooks);
 }
 
