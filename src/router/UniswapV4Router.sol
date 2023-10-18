@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import {Address} from "@openzeppelin/contracts/utils/Address.sol";
-import {ILockCallback} from "@uniswap/v4-core/contracts//interfaces/callback/ILockCallback.sol";
+import {ILockCallback} from "@uniswap/v4-core/contracts/interfaces/callback/ILockCallback.sol";
 import {IPoolManager} from "@uniswap/v4-core/contracts/interfaces/IPoolManager.sol";
 import {UniswapV4RouterLibrary} from "./UniswapV4RouterLibrary.sol";
 

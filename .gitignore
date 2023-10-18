@@ -10,3 +10,9 @@ bin/
 
 # Dotenv file
 .env
+
+node_modules
+cache
+artifacts
+.DS_Store
+cache_hardhat

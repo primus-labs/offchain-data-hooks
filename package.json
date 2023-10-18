@@ -1,0 +1,25 @@
+{
+  "name": "pado-uniswap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "forge build",
+    "deploy:deployTokens": "npx hardhat run --network sepolia scripts/deployTokens.js",
+    "clean": "rm -rf lcov.info coverage artifacts cache_hardhat cache out typechain-types"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "hardhat": "^2.16.1",
+    "@nomicfoundation/hardhat-foundry": "^1.1.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "@uniswap/v4-core": "file:lib/v4-periphery/lib/v4-core",
+    "forge-std": "file:lib/forge-std",
+    "v4-periphery": "file:lib/v4-periphery/contracts"
+  }
+}
