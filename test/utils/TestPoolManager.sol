@@ -30,8 +30,8 @@ contract TestPoolManager {
 
         MockToken _tokenA = new MockToken("Token A", "TOKA", MaxAmount);
         MockToken _tokenB = new MockToken("Token B", "TOKB", MaxAmount);
-        MockToken _tokenC = new MockToken("Token C", "TOKC", MaxAmount);
-        MockToken _tokenD = new MockToken("Token D", "TOKD", MaxAmount);
+        // MockToken _tokenC = new MockToken("Token C", "TOKC", MaxAmount);
+        // MockToken _tokenD = new MockToken("Token D", "TOKD", MaxAmount);
 
         // pools alphabetically sort tokens by address
         // so align `token0` with `pool.token0` for consistency
