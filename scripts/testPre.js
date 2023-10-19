@@ -14,17 +14,17 @@ async function main() {
     const HOOK_SWAP_FEE_FLAG = 0x400000;
     const HOOK_WITHDRAW_FEE_FLAG = 0x200000;
     const poolKey = {
-        currency0: '0x32C238b8b5B92a222EBB498A461571059Daa32c6',
-        currency1: '0x700c009F8C27E3030d3d8Bb9a5D99eBDAEEE465C',
+        currency0: '0x855633649b91F9A6146aeD9CcC18cd617c8e3C3A',
+        currency1: '0xeccef7ccA92edF8a42B314273D96ad75fE485a8a',
         fee: HOOK_SWAP_FEE_FLAG | HOOK_WITHDRAW_FEE_FLAG | 3000,
         tickSpacing: 60,
-        hooks: '0x28D51025C34cc1023078D5fE16Dd8d6Da81A7BBC',
+        hooks: '0x288e0a983aB55bBdC8E8BAb9F68133670edf69c4',
     };
     const poolManagerContract = await ethers.getContractAt("IPoolManager", poolManagerAddress);
     const res = await poolManagerContract.initialize(poolKey, SQRT_RATIO_1_TO_1, "0x");
     console.log("PoolManager initialize res=", res);
 
-    const routerCallerAddress="0x287e5d318353DF210D97B0Ea929B75Abc213600F";
+    const routerCallerAddress="0x63cA492E014Df0EB682DDFd32B388c06d1086354";
     const routerCallerContract = await ethers.getContractAt("UniswapV4Caller", routerCallerAddress);
     const resadd = await routerCallerContract.addLiquidity(poolKey, deployer.address, -60, 60, "0x8ac7230489e80000");
     console.log('resadd=', resadd);

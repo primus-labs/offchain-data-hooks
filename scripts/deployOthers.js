@@ -8,7 +8,14 @@ async function main() {
         "Deploying contracts with the account:",
         deployer.address
     );
-    const  poolManagerAddress = '0x64255ed21366DB43d89736EE48928b890A84E2Cb'
+    const MockToken = await ethers.getContractFactory("MockToken");
+    const token0contract = await MockToken.deploy("PADO MOCK TOKEN 0","PMT1","0x845951614014880000000");
+    console.log("Contract Mock Token1 deployed at:", token0contract.target);
+
+    const token1contract2 = await MockToken.deploy("PADO MOCK TOKEN 1","PMT2","0x845951614014880000000");
+    console.log("Contract Mock Token2 deployed at:", token1contract2.target);
+
+    const  poolManagerAddress = '0x64255ed21366DB43d89736EE48928b890A84E2Cb';
     //1.deploy UniswapV4RouterLibrary
     const UniswapV4RouterLibrary = await ethers.getContractFactory("UniswapV4RouterLibrary");
     const contractUniswapV4RouterLibrary = await UniswapV4RouterLibrary.deploy();
@@ -36,11 +43,11 @@ async function main() {
     console.log("Contract UniswapV4Caller deployed at:", callerAddress);
     
     //4. token approve
-    const token1address="0x32C238b8b5B92a222EBB498A461571059Daa32c6";
+    const token1address=token0contract.target;
     const token1contract = await ethers.getContractAt("MockToken", token1address);
     const res1 = await token1contract.approve(routerAddress, '0x845951614014880000000');
     console.log("token1 approve res1=", res1);
-    const token2address="0x700c009F8C27E3030d3d8Bb9a5D99eBDAEEE465C";
+    const token2address=token1contract2.target;
     const token2contract = await ethers.getContractAt("MockToken", token2address);
     const res2 = await token2contract.approve(routerAddress, '0x845951614014880000000');
     console.log("token1 approve res2=", res2);
@@ -52,9 +59,9 @@ async function main() {
     console.log("Contract KYCFactory deployed at:", contractKYCFactoryAddress);
     
 
-    //const contractKYCFactoryAddress = "0x376A6b8CEA5021bDcEb6b346dA5C2e7aED177f1d";
+    //const contractKYCFactoryAddress = "0x839EFDAbb5Eddf04Cc5aE3e46C23eF23337e34bD";
     const KYCFactoryContract = await ethers.getContractAt("KYCFactory", contractKYCFactoryAddress);
-    const iEasPrxoy="0xb53F5BcB421B0aE0f0d2a16D3f7531A8d00f63aC";
+    const iEasPrxoy="0x140Bd8EaAa07d49FD98C73aad908e69a75867336";
     const eas="0xC2679fBD37d54388Ce493F1DB75320D236e1815e";
     const schemaKyc="0x5f868b117fd34565f3626396ba91ef0c9a607a0e406972655c5137c6d4291af9";
     const schemaCountry="0x5f868b117fd34565f3626396ba91ef0c9a607a0e406972655c5137c6d4291af9";
