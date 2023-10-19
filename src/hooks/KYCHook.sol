@@ -10,7 +10,6 @@ import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import { IEAS } from "./IEAS.sol";
 import { IEASProxy} from "./IEASProxy.sol";
 import { Attestation, EMPTY_UID, uncheckedInc } from "./Common.sol";
-
 import {PADOBaseFactory} from "../PADOBaseFactory.sol";
 
 contract KYCHook is BaseHook, IHookFeeManager, Ownable {
@@ -63,9 +62,9 @@ contract KYCHook is BaseHook, IHookFeeManager, Ownable {
         IPoolManager.ModifyPositionParams calldata,
         bytes calldata
     ) external override returns (bytes4 selector) {
-        /*if(!_checkKycResult(sender)) {
+        if(!_checkKycResult(sender)) {
             revert NOKYC();
-        }*/
+        }
         emit BeforeModify(sender);
         selector = BaseHook.beforeModifyPosition.selector;
     }
@@ -75,9 +74,9 @@ contract KYCHook is BaseHook, IHookFeeManager, Ownable {
         override
         returns (bytes4 selector)
     {
-        /*if(!_checkKycResult(sender)) {
+        if(!_checkKycResult(sender)) {
             revert NOKYC();
-        }*/
+        }
         emit BeforeSwap(sender);
         selector = BaseHook.beforeSwap.selector;
     }
