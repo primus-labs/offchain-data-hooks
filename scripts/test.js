@@ -22,7 +22,7 @@ async function main() {
     const routerCallerAddress="0x287e5d318353DF210D97B0Ea929B75Abc213600F";
     const routerCallerContract = await ethers.getContractAt("UniswapV4Caller", routerCallerAddress);
     const res = await routerCallerContract.swap(poolKey, deployer.address, deployer.address, poolKey.currency0, 1e9);
-    console.log('resadd=', res);
+    console.log('res=', res);
   }
   
   main()
