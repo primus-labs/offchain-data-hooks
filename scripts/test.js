@@ -5,7 +5,7 @@ async function main() {
     const [deployer] = await ethers.getSigners();
   
     console.log(
-    "Deploying contracts with the account:",
+    "test account:",
     deployer.address
     );
   
@@ -21,7 +21,8 @@ async function main() {
 
     const routerCallerAddress="0x63cA492E014Df0EB682DDFd32B388c06d1086354";
     const routerCallerContract = await ethers.getContractAt("UniswapV4Caller", routerCallerAddress);
-    const res = await routerCallerContract.swap(poolKey, deployer.address, deployer.address, poolKey.currency0, 1e9);
+    const initAddr = "0x7ab44DE0156925fe0c24482a2cDe48C465e47573";
+    const res = await routerCallerContract.swap(poolKey, initAddr, initAddr, poolKey.currency0, 1e9);
     console.log('res=', res);
   }
   
