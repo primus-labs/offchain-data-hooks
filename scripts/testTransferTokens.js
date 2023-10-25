@@ -9,7 +9,7 @@ async function main() {
     deployer.address
     );
 
-    const receiveAddr = "0xAB4B98D8d6d4d60ed10f6E2D9613e237B8c28d7F";
+    const receiveAddr = "0x975E046751862b5A0406280DAA3d52Ee5db1AF8C";
     const token1address="0x855633649b91F9A6146aeD9CcC18cd617c8e3C3A";
     const token1contract = await ethers.getContractAt("MockToken", token1address);
     const res1 = await token1contract.transfer(receiveAddr, 1e10);

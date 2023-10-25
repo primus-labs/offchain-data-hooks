@@ -7,7 +7,7 @@
     "compile": "forge build",
     "deploy:deployTokens": "npx hardhat run --network sepolia scripts/deployTokens.js",
     "clean": "rm -rf lcov.info coverage artifacts cache_hardhat cache out typechain-types",
-    "deploy:deployOthers": "npx hardhat run --network sepolia scripts/deployOthers.js",
+    "deploy:deployEverything": "npx hardhat run --network sepolia scripts/deployEverything.js",
     "deploy:deployHook": "npx hardhat run --network sepolia scripts/deployHook.js",
     "test:testPre": "npx hardhat run --network sepolia scripts/testPre.js",
     "test:testTransferTokens": "npx hardhat run --network sepolia scripts/testTransferTokens.js",
