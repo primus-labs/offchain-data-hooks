@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "compile": "forge build",
-    "deploy:deployTokens": "npx hardhat run --network sepolia scripts/deployTokens.js",
-    "clean": "rm -rf lcov.info coverage artifacts cache_hardhat cache out typechain-types",
-    "deploy:deployEverything": "npx hardhat run --network sepolia scripts/deployEverything.js",
-    "deploy:deployHook": "npx hardhat run --network sepolia scripts/deployHook.js",
-    "test:testPre": "npx hardhat run --network sepolia scripts/testPre.js",
+    "deploy:deployPoolManager": "npx hardhat run --network anvil scripts/deployPoolManager.js",
+    "deploy:deployKYCAll": "npx hardhat run --network sepolia scripts/deployKYCAll.js",
+    "deploy:deployKYCHook": "npx hardhat run --network sepolia scripts/deployKYCHook.js",
+    "test:testInitializePool": "npx hardhat run --network sepolia scripts/testInitializePool.js",
+    "test:testAddLiquidity": "npx hardhat run --network sepolia scripts/testAddLiquidity.js",
+    "test:testSwap": "npx hardhat run --network sepolia scripts/testSwap.js",
     "test:testTransferTokens": "npx hardhat run --network sepolia scripts/testTransferTokens.js",
     "test:testApproveTokens": "npx hardhat run --network sepolia scripts/testApproveTokens.js",
-    "test:test": "npx hardhat run --network sepolia scripts/test.js"
+    "clean": "rm -rf lcov.info coverage artifacts cache_hardhat cache out typechain-types"
   },
   "keywords": [],
   "author": "",

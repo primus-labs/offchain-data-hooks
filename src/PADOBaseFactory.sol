@@ -22,16 +22,25 @@ abstract contract PADOBaseFactory {
     function deploy(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry, bytes32 salt) public virtual returns (address);
 
     function mineDeploy(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry) external returns (address) {
-        return mineDeploy(poolManager, iEasPrxoy, eas, schemaKyc, schemaCountry, 0);
+        return _mineDeploy(poolManager, iEasPrxoy, eas, schemaKyc, schemaCountry, 0);
     }
 
-    function mineDeploy(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry, uint256 startSalt) public returns (address) {
+    function mineDeploy(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry, uint256 startSalt) external returns (address) {
+        return _mineDeploy(poolManager, iEasPrxoy, eas, schemaKyc, schemaCountry, startSalt);
+    }
+
+    function mineDeploy2(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry, uint256 startSalt) external returns (address) {
+        return _mineDeploy(poolManager, iEasPrxoy, eas, schemaKyc, schemaCountry, startSalt);
+    }
+
+    function _mineDeploy(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry, uint256 startSalt) internal returns (address) {
         bytes32 salt = mineSalt(poolManager, iEasPrxoy, eas, schemaKyc, schemaCountry, startSalt);
         return deploy(poolManager, iEasPrxoy, eas, schemaKyc, schemaCountry, salt);
     }
 
     function mineSalt(IPoolManager poolManager, IEASProxy iEasPrxoy, IEAS eas, bytes32 schemaKyc, bytes32 schemaCountry, uint256 startSalt) public view returns (bytes32 salt) {
         uint256 endSalt = uint256(startSalt) + 1000;
+        console.log("startSalt %s endSalt %s", startSalt, endSalt);
         unchecked {
             for (uint256 i = startSalt; i < endSalt; ++i) {
                 salt = bytes32(i);
