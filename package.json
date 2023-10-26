@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "forge build",
+    "compile": "npx hardhat compile",
     "deploy:deployPoolManager": "npx hardhat run --network anvil scripts/deployPoolManager.js",
     "deploy:deployKYCAll": "npx hardhat run --network sepolia scripts/deployKYCAll.js",
     "deploy:deployKYCHook": "npx hardhat run --network sepolia scripts/deployKYCHook.js",

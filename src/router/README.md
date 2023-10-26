@@ -6,10 +6,6 @@
 
 - [UniswapV4RouterLibrary](./UniswapV4RouterLibrary.sol) is a library with all the logic for the Uniswap v4 operations.
 
-See the [docs README](../../docs/README.md) for example transactions that use the `UniswapV4Router`.
 
 ![UniswapV4Router Contract](../../docs/UniswapV4Router.svg)
 
-```
-sol2uml class ../src,../lib -b UniswapV4Router,UniswapV4RouterLibrary,UniswapV4Caller -o UniswapV4Router.svg
-```
