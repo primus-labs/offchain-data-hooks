@@ -15,7 +15,7 @@ Get the repo:
 git clone --recursive https://github.com/pado-labs/pado-uniswap.git
 ```
 
-### Hardhat
+- Hardhat
 
 ```sh
 cd pado-uniswap
@@ -24,29 +24,124 @@ npm run compile
 ```
 
 
-### Foundry
+- Foundry
 
 ```sh
 cd pado-uniswap
 forge install
 forge update v4-periphery
+forge build
 ```
 
+## KYC Hook
 
-## Local
+The [KYCHook](./src/hooks/KYCHook.sol) implements the `beforeModifyPosition` and `beforeSwap` hooks.
+
+![KYCHook Contract](./docs/KYCHook.svg)
 
 
-## KYC on Sepolia
+## Localhost (Anvil)
 
-Summary of the modify position calls (AddLiquidity):
 
-![KYC Modify Summary](./docs/sepolia/AddLiquidity.svg)
+## Onchain (Sepolia)
 
-Summary of the swap calls (Swap):
 
-![KYC Swap Summary](./docs/sepolia/Swap.svg)
+### Preparations
+
+1. Set your private key in `.env`, ref `.env.example`.
+2. Set the following addresses in `.address`:
+   - A deployed [Uniswap v4 Pool Manager](https://sepolia.etherscan.io/address/0x64255ed21366DB43d89736EE48928b890A84E2Cb). 
+   - The arguments of KYCHook ([EAS](https://sepolia.etherscan.io/address/0xC2679fBD37d54388Ce493F1DB75320D236e1815e), [EASProxy](https://sepolia.etherscan.io/address/0x140Bd8EaAa07d49FD98C73aad908e69a75867336), [SchemaKyc](https://sepolia.easscan.org/schema/view/0x5f868b117fd34565f3626396ba91ef0c9a607a0e406972655c5137c6d4291af9), [SchemaCountry](https://sepolia.easscan.org/schema/view/0x5f868b117fd34565f3626396ba91ef0c9a607a0e406972655c5137c6d4291af9)).
+
+```log
+POOL_MANAGER=0x64255ed21366DB43d89736EE48928b890A84E2Cb
+
+EASPROXY_ADDRESS=0x140Bd8EaAa07d49FD98C73aad908e69a75867336
+EAS_ADDRESS=0xC2679fBD37d54388Ce493F1DB75320D236e1815e
+SCHEMA_KYC_BYTES=0x5f868b117fd34565f3626396ba91ef0c9a607a0e406972655c5137c6d4291af9
+SCHEMA_COUNTRY_BYTES=0x5f868b117fd34565f3626396ba91ef0c9a607a0e406972655c5137c6d4291af9
+```
+
+<br>
+
+In the following steps, the `deployer` is `0x48f760bd0678DAAF51a9417Ca68eDb210eB50104`.
+
+
+### Steps
+
+- Deploy the `Tokens`, `Router`, `Caller`, `KYCFactory` contracts, and make a token approving by the [deployKYCFirst](./scripts/deployKYCFirst.js) script.
+
+```sh
+npx hardhat run --network sepolia scripts/deployKYCFirst.js
+```
+
+output:
+
+```log
+TOKEN0=0x146F8F5622BA97D62dAd8C9aD6C2011cEc524922
+TOKEN1=0xb61872f098D5E2B76b8333fbadaed41C02124DE7
+ROUTER=0xE6ae84584D424f0cf21Dd727150ce9C1aB5962a9
+CALLER=0xf95C491b01b159870052e831d11851b0922B7cF9
+KYC_FACTORY=0x6fC0FD1C3DF9813e9B327B5b52Cd12eaEe7bd567
+```
+append/replace the above addresses in `.address`.
+
+
+<br>
+
+
+- Deploy a `KYCHook` contract via the `KYCFactory` to generate the correct address prefix by the [deployKYCHook](./scripts/deployKYCHook.js) script. 
+
+```sh
+npx hardhat run --network sepolia scripts/deployKYCHook.js
+```
+
+output: (Get this address by looking at the [internal txns](https://sepolia.etherscan.io/tx/0x2b1ee31377cbc2674290af01de4ad693765c65221bb842b701aa88c8728c3440#internal))
+
+```
+KYC_HOOK=0x282897282cc94b43e7822438c2ce0d58cf3f8cf7
+```
+append/replace the above address in `.address`.
+
+
+![KYC Hook](./docs/sepolia/KYCHook.svg)
+
+
+<br>
+
+- Initialize a new `Uniswap v4 Pool` using the hook by the [InitializePool](./scripts/testInitializePool.js) script.
+
+```sh
+npx hardhat run --network sepolia scripts/testInitializePool.js
+```
+
+![Initialize Pool](./docs/sepolia/InitializePool.svg)
+
+<br>
+
+
+
+- Add token liquidity to the pool by the [AddLiquidity](./scripts/testAddLiquidity.js) script.
+
+```sh
+npx hardhat run --network sepolia scripts/testAddLiquidity.js
+```
+![Add Liquidity](./docs/sepolia/AddLiquidity.svg)
+
+
+<br>
+
+
+- Perform a token swap by the [Swap](./scripts/testSwap.js) script.
+
+```sh
+npx hardhat run --network sepolia scripts/testSwap.js
+```
+
+![Swap Tokens](./docs/sepolia/Swap.svg)
+
 
 The swap value flows:
 
-![KYC Swap Value Flows](./docs/sepolia/SwapValueFlow.svg)
+![Swap Value Flows](./docs/sepolia/SwapValueFlow.svg)
 

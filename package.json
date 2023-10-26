@@ -7,6 +7,7 @@
     "compile": "npx hardhat compile",
     "deploy:deployPoolManager": "npx hardhat run --network anvil scripts/deployPoolManager.js",
     "deploy:deployKYCAll": "npx hardhat run --network sepolia scripts/deployKYCAll.js",
+    "deploy:deployKYCFirst": "npx hardhat run --network sepolia scripts/deployKYCFirst.js",
     "deploy:deployKYCHook": "npx hardhat run --network sepolia scripts/deployKYCHook.js",
     "test:testInitializePool": "npx hardhat run --network sepolia scripts/testInitializePool.js",
     "test:testAddLiquidity": "npx hardhat run --network sepolia scripts/testAddLiquidity.js",
