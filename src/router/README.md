@@ -7,5 +7,5 @@
 - [UniswapV4RouterLibrary](./UniswapV4RouterLibrary.sol) is a library with all the logic for the Uniswap v4 operations.
 
 
-![UniswapV4Router Contract](../../docs/UniswapV4Router.svg)
+![UniswapV4Router Contract](../../docs/class/UniswapV4RouterContract.svg)
 

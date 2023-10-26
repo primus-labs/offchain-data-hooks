@@ -14,7 +14,7 @@
 <title>24</title>
 <polygon fill="#f2f2f2" stroke="black" points="333.24,-0.5 333.24,-377.3 1119.5,-377.3 1119.5,-0.5 333.24,-0.5"/>
 <text text-anchor="middle" x="726.37" y="-360.7" font-family="Times,serif" font-size="14.00">UniswapV4Caller</text>
-<text text-anchor="middle" x="726.37" y="-343.9" font-family="Times,serif" font-size="14.00">UniswapV4Caller.sol</text>
+<text text-anchor="middle" x="726.37" y="-343.9" font-family="Times,serif" font-size="14.00">src/router/UniswapV4Caller.sol</text>
 <polyline fill="none" stroke="black" points="333.24,-335.7 1119.5,-335.7 "/>
 <text text-anchor="start" x="341.24" y="-319.1" font-family="Times,serif" font-size="14.00">Public:</text>
 <text text-anchor="start" x="341.24" y="-302.3" font-family="Times,serif" font-size="14.00"> &#160;&#160;router: UniswapV4Router</text>
@@ -42,7 +42,7 @@
 <title>27</title>
 <polygon fill="#f2f2f2" stroke="black" points="350.89,-414.3 350.89,-623.1 833.85,-623.1 833.85,-414.3 350.89,-414.3"/>
 <text text-anchor="middle" x="592.37" y="-606.5" font-family="Times,serif" font-size="14.00">UniswapV4Router</text>
-<text text-anchor="middle" x="592.37" y="-589.7" font-family="Times,serif" font-size="14.00">UniswapV4Router.sol</text>
+<text text-anchor="middle" x="592.37" y="-589.7" font-family="Times,serif" font-size="14.00">src/router/UniswapV4Router.sol</text>
 <polyline fill="none" stroke="black" points="350.89,-581.5 833.85,-581.5 "/>
 <text text-anchor="start" x="358.89" y="-564.9" font-family="Times,serif" font-size="14.00">Public:</text>
 <text text-anchor="start" x="358.89" y="-548.1" font-family="Times,serif" font-size="14.00"> &#160;&#160;manager: IPoolManager</text>
@@ -67,7 +67,7 @@
 <polygon fill="#f2f2f2" stroke="black" points="0,-660.1 0,-986.5 1184.74,-986.5 1184.74,-660.1 0,-660.1"/>
 <text text-anchor="middle" x="592.37" y="-969.9" font-family="Times,serif" font-size="14.00">&lt;&lt;Library&gt;&gt;</text>
 <text text-anchor="middle" x="592.37" y="-953.1" font-family="Times,serif" font-size="14.00">UniswapV4RouterLibrary</text>
-<text text-anchor="middle" x="592.37" y="-936.3" font-family="Times,serif" font-size="14.00">UniswapV4RouterLibrary.sol</text>
+<text text-anchor="middle" x="592.37" y="-936.3" font-family="Times,serif" font-size="14.00">src/router/UniswapV4RouterLibrary.sol</text>
 <polyline fill="none" stroke="black" points="0,-928.1 1184.74,-928.1 "/>
 <text text-anchor="middle" x="592.37" y="-911.5" font-family="Times,serif" font-size="14.00"> </text>
 <polyline fill="none" stroke="black" points="0,-903.3 1184.74,-903.3 "/>

@@ -14,7 +14,7 @@
 <title>21</title>
 <polygon fill="#f2f2f2" stroke="black" points="0,-0.5 0,-343.7 733.36,-343.7 733.36,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="366.68" y="-327.1" font-family="Times,serif" font-size="14.00">KYCHook</text>
-<text text-anchor="middle" x="366.68" y="-310.3" font-family="Times,serif" font-size="14.00">../src/hooks/KYCHook.sol</text>
+<text text-anchor="middle" x="366.68" y="-310.3" font-family="Times,serif" font-size="14.00">src/hooks/KYCHook.sol</text>
 <polyline fill="none" stroke="black" points="0,-302.1 733.36,-302.1 "/>
 <text text-anchor="middle" x="366.68" y="-285.5" font-family="Times,serif" font-size="14.00"> </text>
 <polyline fill="none" stroke="black" points="0,-277.3 733.36,-277.3 "/>

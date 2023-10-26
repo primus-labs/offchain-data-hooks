@@ -3,5 +3,5 @@
 
 ## KYCHook Contract
 
-![KYCHook Contract](../../docs/KYCHook.svg)
+![KYCHook Contract](../../docs/class/KYCHookContract.svg)
 
