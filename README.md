@@ -72,7 +72,7 @@ In the following steps, the `deployer` is `0x48f760bd0678DAAF51a9417Ca68eDb210eB
 
 ### Steps
 
-- Deploy the `Tokens`, `Router`, `Caller`, `KYCFactory` contracts, and make a token approving by the [deployKYCFirst](./scripts/deployKYCFirst.js) script.
+- Deploy the `Tokens`, `Router`, `Caller`, `KYCFactory` contracts, and make a token approving by the [KYCFirst](./scripts/deployKYCFirst.js) script.
 
 ```sh
 npx hardhat run --network sepolia scripts/deployKYCFirst.js
@@ -93,7 +93,7 @@ append/replace the above addresses in `.address`.
 <br>
 
 
-- Deploy a `KYCHook` contract via the `KYCFactory` to generate the correct address prefix by the [deployKYCHook](./scripts/deployKYCHook.js) script. 
+- Deploy a `KYCHook` contract via the `KYCFactory` to generate the correct address prefix by the [KYCHook](./scripts/deployKYCHook.js) script. 
 
 ```sh
 npx hardhat run --network sepolia scripts/deployKYCHook.js
@@ -121,7 +121,6 @@ npx hardhat run --network sepolia scripts/testInitializePool.js
 ![Initialize Pool](./docs/sepolia/InitializePool.svg)
 
 <br>
-
 
 
 - Add token liquidity to the pool by the [AddLiquidity](./scripts/testAddLiquidity.js) script.

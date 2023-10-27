@@ -70,7 +70,7 @@ KYC_FACTORY=0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6
 <br>
 
 
-- Deploy the fake EAS and EASProxy by the [EAS](../script/EASScript.sol) script.
+- Deploy the mock EAS and EASProxy by the [EAS](../script/EASScript.sol) script.
 
 
 ```sh
