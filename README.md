@@ -51,8 +51,8 @@ The [KYCHook](./src/hooks/KYCHook.sol) implements the `beforeModifyPosition` and
 
 ### Preparations
 
-1. Reference `.env.example` sets your private key in `.env`.
-2. Set the following addresses in `.address`:
+1. Reference [.env.example](./.env.example) sets your private key in [.env](./.env).
+2. Set the following addresses in [.address](./.address):
    - A deployed [Uniswap v4 Pool Manager](https://sepolia.etherscan.io/address/0x64255ed21366DB43d89736EE48928b890A84E2Cb). 
    - The arguments of KYCHook ([EAS](https://sepolia.etherscan.io/address/0xC2679fBD37d54388Ce493F1DB75320D236e1815e), [EASProxy](https://sepolia.etherscan.io/address/0x140Bd8EaAa07d49FD98C73aad908e69a75867336), [SchemaKyc](https://sepolia.easscan.org/schema/view/0x5f868b117fd34565f3626396ba91ef0c9a607a0e406972655c5137c6d4291af9), [SchemaCountry](https://sepolia.easscan.org/schema/view/0x5f868b117fd34565f3626396ba91ef0c9a607a0e406972655c5137c6d4291af9)).
 
