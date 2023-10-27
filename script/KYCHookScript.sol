@@ -12,29 +12,26 @@ import {PoolManager} from "@uniswap/v4-core/contracts/PoolManager.sol";
 import {TickMath} from "@uniswap/v4-core/contracts/libraries/TickMath.sol";
 import {IPoolManager} from "@uniswap/v4-core/contracts/interfaces/IPoolManager.sol";
 
-import {KYCUtil} from "./utils/KYCUtil.sol";
-
-import {console} from "forge-std/console.sol";
-import {MockToken} from "../src/mocks/MockToken.sol";
-import {UniswapV4Router} from "../src/router/UniswapV4Router.sol";
-import {UniswapV4Caller} from "../src/router/UniswapV4Caller.sol";
 import {KYCFactory} from "../src/hooks/KYCHook.sol";
 import {IEAS} from "../src/hooks/IEAS.sol";
 import {IEASProxy} from "../src/hooks/IEASProxy.sol";
+import {KYCUtil} from "./utils/KYCUtil.sol";
 
+import {console} from "forge-std/console.sol";
 import "forge-std/Script.sol";
 
-contract KYCTestAddLiquidityScript is Script, KYCUtil {
+contract KYCHookScript is Script, KYCUtil {
     uint256 privateKey;
     address signerAddr;
 
-    ERC20 tokenA;
-    ERC20 tokenB;
-    UniswapV4Caller caller;
-    IHooks hook;
+    IPoolManager manager;
+    IEASProxy easproxy;
+    IEAS eas;
 
-    // .env.[PRIVATE_KEY]
-    // .env.[TOKENA, TOKENB, CALLER, KYC_HOOK]
+    KYCFactory factory;
+
+    // .env.[PRIVATE_KEY, POOL_MANAGER]
+    // .env.[EASPROXY_ADDRESS, EAS_ADDRESS, SCHEMA_KYC_BYTES, SCHEMA_COUNTRY_BYTES]
     function run() public {
         console.log("msg.sender %s", msg.sender);
         console.log("script %s", address(this));
@@ -43,25 +40,30 @@ contract KYCTestAddLiquidityScript is Script, KYCUtil {
         signerAddr = vm.addr(privateKey);
         console.log("DEPLOYER=%s", signerAddr);
 
-        address _tokenA = vm.envAddress("TOKENA");
-        console.log("TOKENA=%s", _tokenA);
-        address _tokenB = vm.envAddress("TOKENB");
-        console.log("TOKENB=%s", _tokenB);
-        address _caller = vm.envAddress("CALLER");
-        console.log("CALLER=%s", _caller);
-        address _hook = vm.envAddress("KYC_HOOK");
-        console.log("HOOK=%s", _hook);
+        address _manager = vm.envAddress("POOL_MANAGER");
+        console.log("POOL_MANAGER=%s", _manager);
+
+        address _easproxy = vm.envAddress("EASPROXY_ADDRESS");
+        console.log("EASPROXY_ADDRESS=%s", _easproxy);
+        address _eas = vm.envAddress("EAS_ADDRESS");
+        console.log("EAS_ADDRESS=%s", _eas);
+
+        bytes32 schemaKyc = vm.envBytes32("SCHEMA_KYC_BYTES");
+        // console.log("SCHEMA_KYC_BYTES=%s", schemaKyc);
+        bytes32 schemaCountry = vm.envBytes32("SCHEMA_COUNTRY_BYTES");
+        // console.log("SCHEMA_COUNTRY_BYTES=%s", schemaCountry);
+
+        address _factory = vm.envAddress("KYC_FACTORY");
+        console.log("KYC_FACTORY=%s", _factory);
 
         vm.startBroadcast(privateKey);
 
-        tokenA = ERC20(_tokenA);
-        tokenB = ERC20(_tokenB);
-        caller = UniswapV4Caller(_caller);
-        hook = IHooks(_hook);
+        manager = IPoolManager(_manager);
+        easproxy = IEASProxy(_easproxy);
+        eas = IEAS(_eas);
+        factory = KYCFactory(_factory);
 
-        PoolKey memory poolKey = KYCUtil.getPoolKey(tokenA, tokenB, hook);
-
-        KYCUtil.addLiquidity(caller, poolKey, signerAddr);
+        KYCUtil.deployKYCHook(factory, manager, easproxy, eas, schemaKyc, schemaCountry);
 
         vm.stopBroadcast();
     }
