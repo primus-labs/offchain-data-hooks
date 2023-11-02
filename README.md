@@ -10,7 +10,8 @@ Off-chain data attestations are privacy-preserving data proofs created by end us
 
 The demo implements the following [proposal](https://hackmd.io/QXi9YUvUSwmqxCuGl7Z9XA), where users with submitted proofs-of-KYC-status can be privileged to swap tokens on DEX. This enables new scenarios like institutional swaps.
 
-![image](https://github.com/pado-labs/pado-uniswap/assets/17900089/66323b73-099f-4385-8f16-09cef98863cf)
+![image](https://hackmd.io/_uploads/BJDoNmdk6.png))
+
 
 Besides the demo, PADO is an attestation protocol to support:
 1. connecting with arbitrary data sources from TLS transmission, and proving the data authenticity;
