@@ -7,6 +7,6 @@ fs_permissions = [{ access = "read-write", path = ".forge-snapshots/"}]
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/crates/config
 
-solc_version = '0.8.21'
+solc_version = '0.8.26'
 optimize = true
 optimizer-runs = 1
