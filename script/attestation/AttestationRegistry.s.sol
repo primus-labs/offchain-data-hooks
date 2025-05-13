@@ -5,6 +5,8 @@ import {Script} from "forge-std/Script.sol";
 import "forge-std/Test.sol";
 import {AttestationRegistry} from "src/attestation/AttestationRegistry.sol";
 
+//source .env
+//forge script script/attestation/AttestationRegistry.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
 contract DeployAttestationRegistry is Script {
     function run() external {
         // private key from env

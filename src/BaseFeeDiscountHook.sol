@@ -3,7 +3,7 @@
 pragma solidity 0.8.26;
 
 import {LPFeeLibrary} from "v4-core/src/libraries/LPFeeLibrary.sol";
-import {PoolId,PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
+import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
 import {PoolKey} from "v4-core/src/types/PoolKey.sol";
 import {IAttestationRegistry} from "./IAttestationRegistry.sol";
 import {Attestation} from "./types/Common.sol";
@@ -13,7 +13,7 @@ import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 import {BaseHook} from "v4-periphery/src/utils/BaseHook.sol";
 import {PoolManager} from "v4-core/src/PoolManager.sol";
 
-abstract contract BaseFeeDiscountHook is BaseHook,Ownable {
+abstract contract BaseFeeDiscountHook is BaseHook, Ownable {
     using LPFeeLibrary for uint24;
     using PoolIdLibrary for PoolKey;
 
@@ -42,7 +42,10 @@ abstract contract BaseFeeDiscountHook is BaseHook,Ownable {
     // AttestationRegistry
     IAttestationRegistry public iAttestationRegistry;
 
-    constructor(IAttestationRegistry _iAttestationRegistry, IPoolManager _poolManager , address initialOwner) Ownable(initialOwner)  {
+    constructor(IAttestationRegistry _iAttestationRegistry, IPoolManager _poolManager, address initialOwner)
+        Ownable(initialOwner)
+        BaseHook(_poolManager)
+    {
         iAttestationRegistry = _iAttestationRegistry;
     }
 
@@ -67,7 +70,6 @@ abstract contract BaseFeeDiscountHook is BaseHook,Ownable {
         uint24 oldFee = defaultFee;
         defaultFee = fee;
         emit DefaultFeeChanged(oldFee, fee);
-
     }
 
     /*
@@ -126,7 +128,7 @@ abstract contract BaseFeeDiscountHook is BaseHook,Ownable {
             // Ensure attestation has a valid timestamp field
             if (
                 (block.timestamp - attestation.timestamp / 1000) <= durationOfAttestation * 24 * 60 * 60
-                && attestation.value >= baseValue
+                    && attestation.value >= baseValue
             ) {
                 return true;
             }

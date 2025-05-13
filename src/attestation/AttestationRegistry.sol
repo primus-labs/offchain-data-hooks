@@ -48,7 +48,6 @@ contract AttestationRegistry is Ownable, IAttestationRegistry {
     // cexUrl to cexName removed event
     event UrlToCexInfoRemoved(string indexed cexUrl);
 
-
     /**
      *  @dev Constructor
      *  @param _primusZKTLS The address of the IPrimusZKTLS contract
@@ -73,7 +72,7 @@ contract AttestationRegistry is Ownable, IAttestationRegistry {
         emit SetPrimusZKTLS(_origenPrimus, _primusZKTLS);
     }
 
-    /**     
+    /**
      *  @dev set submissionFee
      *  @param _submissionFee The submission fee
      *
