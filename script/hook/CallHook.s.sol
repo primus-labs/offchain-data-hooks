@@ -32,25 +32,33 @@ contract CallHook is Script {
     }
 
     function setDefaultFee() public {
-        //        hook.setDefaultFee(400000);
-        PoolId poolId = hook.poolsInitialized(0);
-        PoolId[] memory poolIds = new PoolId[](1);
-        poolIds[0] = poolId;
-        hook.updatePoolFeeByPoolId(poolIds, 40000);
-        (,,, uint24 lpFee) = poolManager.getSlot0(poolId);
-        console.log("fee from poolManager is:", lpFee);
-        console.log("fee from hook is:", hook.poolFeeMapping(poolId));
+        hook.setDefaultFee(3000);
+        // PoolId poolId = hook.poolsInitialized(0);
+        // PoolId[] memory poolIds = new PoolId[](1);
+        // poolIds[0] = poolId;
+        // hook.updatePoolFeeByPoolId(poolIds, 40000);
+        // (,,, uint24 lpFee) = poolManager.getSlot0(poolId);
+        // console.log("fee from poolManager is:", lpFee);
+        // console.log("fee from hook is:", hook.poolFeeMapping(poolId));
+    }
+
+    function setDurationOfAttestation() public {
+        hook.setDurationOfAttestation(1);
     }
 
     function setBaseValue() public {
-        hook.setBaseValue(3000);
+        hook.setBaseValue(5000);
     }
 
     function getBaseValue() public {
+        console.log("baseValue:", hook.baseValue());
+    }
+
+    function getPool0Fee() public {
         PoolId poolId = hook.poolsInitialized(0);
         bytes32 poolIdBytes = PoolId.unwrap(poolId);
-        uint24 baseValue = hook.poolFeeMapping(poolId);
+        uint24 fee = hook.poolFeeMapping(poolId);
         console.logBytes32(poolIdBytes);
-        console.log(baseValue);
+        console.log(fee);
     }
 }
