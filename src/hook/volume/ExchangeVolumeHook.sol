@@ -10,6 +10,7 @@ import {IAttestationRegistry} from "../../IAttestationRegistry.sol";
 import {IHooks} from "v4-core/src/interfaces/IHooks.sol";
 import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 import {ModifyLiquidityParams, SwapParams} from "v4-core/src/types/PoolOperation.sol";
+import {PositionManager} from "v4-periphery/src/PositionManager.sol";
 
 import {PoolIdLibrary, PoolId} from "v4-core/src/types/PoolId.sol";
 import {PoolKey} from "v4-core/src/types/PoolKey.sol";
@@ -20,8 +21,9 @@ import {PoolKey} from "v4-core/src/types/PoolKey.sol";
 contract ExchangeVolumeHook is BaseFeeDiscountHook {
     using PoolIdLibrary for PoolKey;
 
+
     constructor(IPoolManager _poolManager, IAttestationRegistry _attestationRegistry, address initialOwner)
-    BaseFeeDiscountHook(_attestationRegistry, _poolManager, initialOwner)
+        BaseFeeDiscountHook(_attestationRegistry, _poolManager, initialOwner)
     {}
 
     function getHookPermissions() public pure override returns (Hooks.Permissions memory) {
@@ -44,22 +46,24 @@ contract ExchangeVolumeHook is BaseFeeDiscountHook {
     }
 
     function _afterInitialize(address sender, PoolKey calldata key, uint160 sqrtPriceX96, int24 tick)
-    internal
-    override
-    onlyPoolManager
-    returns (bytes4)
+        internal
+        override
+        onlyPoolManager
+        returns (bytes4)
     {
         poolManager.updateDynamicLPFee(key, defaultFee);
         poolFeeMapping[key.toId()] = defaultFee;
         poolsInitialized.push(key.toId());
+        poolIdToPoolKey[key.toId()] = key;
+        emit AfterInitialize(key.toId());
         return (this.afterInitialize.selector);
     }
 
     function _beforeSwap(address sender, PoolKey calldata key, SwapParams calldata params, bytes calldata hookData)
-    internal
-    override
-    onlyPoolManager
-    returns (bytes4, BeforeSwapDelta, uint24)
+        internal
+        override
+        onlyPoolManager
+        returns (bytes4, BeforeSwapDelta, uint24)
     {
         uint24 fee = getFeeDiscount(tx.origin, key);
         return (this.beforeSwap.selector, BeforeSwapDeltaLibrary.ZERO_DELTA, fee);
@@ -80,12 +84,11 @@ contract ExchangeVolumeHook is BaseFeeDiscountHook {
       @param fee
       @return
      */
-    //    function updatePoolFeeByPoolId(PoolId[] memory poolIds, uint24 newBaseFee) external onlyOwner {
-    //        for (uint256 i = 0; i < poolIds.length; i++) {
-    //            (Currency currency0, Currency currency1, IHooks hooks, IPoolManager manager, uint24 fee, bytes32 parameters)
-    //            = poolManager.poolIdToPoolKey(poolIds[i]);
-    //            poolManager.updateDynamicLPFee(PoolKey(currency0, currency1, hooks, manager, fee, parameters), newBaseFee);
-    //            poolFeeMapping[poolIds[i]] = newBaseFee;
-    //        }
-    //    }
+    function updatePoolFeeByPoolId(PoolId[] memory poolIds, uint24 newBaseFee) external onlyOwner {
+        for (uint256 i = 0; i < poolIds.length; i++) {
+            PoolKey memory poolKey = poolIdToPoolKey[poolIds[i]];
+            poolManager.updateDynamicLPFee(poolKey, newBaseFee);
+            poolFeeMapping[poolIds[i]] = newBaseFee;
+        }
+    }
 }

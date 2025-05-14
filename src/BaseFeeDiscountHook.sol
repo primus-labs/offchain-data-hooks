@@ -3,6 +3,7 @@
 pragma solidity 0.8.26;
 
 import {LPFeeLibrary} from "v4-core/src/libraries/LPFeeLibrary.sol";
+import {PositionManager} from "v4-periphery/src/PositionManager.sol";
 import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
 import {PoolKey} from "v4-core/src/types/PoolKey.sol";
 import {IAttestationRegistry} from "./IAttestationRegistry.sol";
@@ -13,12 +14,15 @@ import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 import {BaseHook} from "v4-periphery/src/utils/BaseHook.sol";
 import {PoolManager} from "v4-core/src/PoolManager.sol";
 
+
 abstract contract BaseFeeDiscountHook is BaseHook, Ownable {
     using LPFeeLibrary for uint24;
     using PoolIdLibrary for PoolKey;
 
+
     event BeforeAddLiquidity(address indexed sender);
     event BeforeSwap(address indexed sender);
+    event AfterInitialize(PoolId poolId);
 
     event DefaultFeeChanged(uint24 oldFee, uint24 newFee);
     event BaseValueChanged(uint24 oldBaseValue, uint24 newBaseValue);
@@ -38,6 +42,9 @@ abstract contract BaseFeeDiscountHook is BaseHook, Ownable {
     PoolId[] public poolsInitialized;
 
     mapping(PoolId => uint24) public poolFeeMapping;
+
+    mapping(PoolId id => PoolKey poolKey) public poolIdToPoolKey;
+
 
     // AttestationRegistry
     IAttestationRegistry public iAttestationRegistry;
