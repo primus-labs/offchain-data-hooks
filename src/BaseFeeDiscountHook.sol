@@ -27,13 +27,13 @@ abstract contract BaseFeeDiscountHook is BaseHook, Ownable {
 
     uint24 public defaultFee = 3000;
 
-    uint24 public baseValue = 10000;
+    uint24 public baseValue = 5000;
 
     uint24 public defaultDiscount = 50;
 
     uint24 public constant DISCOUNT_FEE_DENOMINATOR = 100;
 
-    uint24 public durationOfAttestation = 7;
+    uint24 public durationOfAttestation = 1;
 
     PoolId[] public poolsInitialized;
 
