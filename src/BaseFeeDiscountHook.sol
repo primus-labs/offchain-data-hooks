@@ -59,7 +59,7 @@ abstract contract BaseFeeDiscountHook is BaseHook, Ownable {
     function getFeeDiscount(address sender, PoolKey memory poolKey) internal view returns (uint24) {
         uint24 poolFee = poolFeeMapping[poolKey.toId()];
         if (_checkAttestations(sender)) {
-            return (poolFee * defaultDiscount / DISCOUNT_FEE_DENOMINATOR);
+            return (poolFee * defaultDiscount / DISCOUNT_FEE_DENOMINATOR) | LPFeeLibrary.OVERRIDE_FEE_FLAG;
         }
         return poolFee;
     }

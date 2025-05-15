@@ -26,8 +26,8 @@ contract CallHook is Script {
         poolManager = PoolManager(vm.envAddress("POOL_MANAGER"));
         vm.startBroadcast(senderPrivateKey);
 
-        // setBaseValue();
-        getBaseValue();
+         setBaseValue();
+//        getBaseValue();
         vm.stopBroadcast();
     }
 
@@ -47,10 +47,11 @@ contract CallHook is Script {
     }
 
     function setBaseValue() public {
-        hook.setBaseValue(5000);
+        hook.setBaseValue(10);
     }
 
     function getBaseValue() public {
+        console.log( hook.baseValue()==10);
         console.log("baseValue:", hook.baseValue());
     }
 
