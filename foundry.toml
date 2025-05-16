@@ -1,5 +1,6 @@
 [profile.default]
 src = "src"
+via_ir = true
 out = "out"
 libs = ["lib"]
 ffi = true

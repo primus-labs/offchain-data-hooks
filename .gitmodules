@@ -8,3 +8,6 @@
 [submodule "lib/zkTLS-contracts"]
 	path = lib/zkTLS-contracts
 	url = https://github.com/primus-labs/zkTLS-contracts
+[submodule "lib/universal-router"]
+	path = lib/universal-router
+	url = https://github.com/Uniswap/universal-router
