@@ -12,7 +12,7 @@ import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 import {PoolKey} from "v4-core/src/types/PoolKey.sol";
 import {StateLibrary} from "v4-core/src/libraries/StateLibrary.sol";
 
-//forge script script/pool-cl/caller/CallHook.s.sol:CallHook --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
+//forge script script/pool/caller/CallHook.s.sol:CallHook --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
 contract CallHook is Script {
     ExchangeVolumeHook public hook;
     PoolManager public poolManager;
@@ -47,7 +47,7 @@ contract CallHook is Script {
     }
 
     function setBaseValue() public {
-        hook.setBaseValue(10);
+        hook.setBaseValue(0);
     }
 
     function getBaseValue() public {

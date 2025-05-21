@@ -110,7 +110,7 @@ ATTESTATION_REGISTRY=0x6c2270298b1e6046898a322acB3Cbad6F99f7CBD
 
 ```sh
 source .env
-forge script script/pool-cl/DeployHook.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
+forge script script/pool/DeployHook.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
 ```
 
 output (sample):
@@ -126,7 +126,7 @@ Add/replace the above address in `.env`.
 
 ```sh
 source .env
-forge script script/pool-cl/Test.s.sol:TestInitializeScript --rpc-url $RPC_URL --private-key $PRIVATE_KEY --gas-estimate-multiplier 600 --broadcast
+forge script script/pool/Test.s.sol:TestInitializeScript --rpc-url $RPC_URL --private-key $PRIVATE_KEY --gas-estimate-multiplier 600 --broadcast
 ```
 
 This command only needs to be executed once.
@@ -152,14 +152,14 @@ Before performing a swap test, make sure to approve the token first.
 
 ```sh
 source .env
-forge script script/pool-cl/Approve.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
+forge script script/pool/Approve.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
 ```
 
 #### Add Liquidity
 
 ```sh
 source .env
-forge script script/pool-cl/Test.s.sol:TestAddLiquidityScript --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
+forge script script/pool/Test.s.sol:TestAddLiquidityScript --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
 ```
 
 <br/>
@@ -168,5 +168,5 @@ forge script script/pool-cl/Test.s.sol:TestAddLiquidityScript --rpc-url $RPC_URL
 
 ```sh
 source .env
-forge script script/pool-cl/Test.s.sol:TestSwapScript --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
+forge script script/pool/Test.s.sol:TestSwapScript --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
 ```
