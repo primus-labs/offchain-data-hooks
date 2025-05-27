@@ -15,7 +15,7 @@ contract DeployAttestationRegistry is Script {
 
         // initialize variables from env
         address primusZKTLS = vm.envAddress("PRIMUS_ZKTLS"); // IPrimusZKTLS contract address
-        uint256 submissionFee = 0; // submit fee
+        uint256 submissionFee = 100000000000000; // submit fee
         address payable feeRecipient = payable(vm.envAddress("FEE_RECIPIENT")); // fee recipient
 
         // deploy AttestationRegistry

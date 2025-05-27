@@ -25,6 +25,7 @@ scrollsepolia = "https://sepolia-rpc.scroll.io/"
 lineasepolia = "https://linea-sepolia.infura.io/v3/b6bf7d3508c941499b10025c0776eaf8"
 sophontestnet = "https://rpc.testnet.sophon.xyz"
 baseSepoliaTestnet = "https://sepolia.base.org"
+unichainsepolia = "https://sepolia.unichain.org/"
 
 #mainnet
 arbitrumone = "https://arb1.arbitrum.io/rpc"
@@ -38,3 +39,4 @@ scroll = "https://rpc.scroll.io/"
 sophon = "https://rpc.sophon.xyz"
 baseMainnet = "https://mainnet.base.org"
 camp = "https://rpc.basecamp.t.raas.gelato.cloud"
+unichainMainnet = "https://mainnet.unichain.org"
