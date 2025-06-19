@@ -49,7 +49,6 @@ Configure the contract address, private key, RPC, and other settings.
 1. Copy `./.env.sepolia` to `./.env`, and set your private key (`PRIVATE_KEY`).
 2. The following parameters are already set:
    - Uniswap Swap (, [PoolManager](https://docs.uniswap.org/contracts/v4/deployments)).
-   - The arguments of Hook ([AttestationRegistry](https://testnet.bscscan.com/address/0x9109Ea5A8Af5c3c5600F6E8213bd83348C81a573)).
 
 
 ### Deployment
