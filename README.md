@@ -1,10 +1,10 @@
-# CEX Trading Hooks For Uniswap Infinity
+# CEX Trading Hooks For Uniswap v4
 
 ## Overview
 
-This repository introduces a CEX trading hook for Uniswap Infinity, enabling users to validate their 30-day spot trading volume across centralized exchanges (CEXs) to become eligible for a swap fee discount. Specifically, if a user generates and submits a proof (attestation) of their 30-day CEX trading volume exceeding a specified USDT threshold to the BNB Chain, and this proof is successfully verified by the hook contract, the user will enjoy a 50% discount on swapping fees on Uniswap for a period of 7 days.
+This repository introduces a CEX trading hook for Uniswap v4, enabling users to validate their 30-day spot trading volume across centralized exchanges (CEXs) to become eligible for a swap fee discount. Specifically, if a user generates and submits a proof (attestation) of their 30-day CEX trading volume exceeding a specified USDT threshold to the UniChain, and this proof is successfully verified by the hook contract, the user will enjoy a 50% discount on swapping fees on any specified Uniswap pool for a period of 7 days.
 
-As a pool initiator, you can invoke this hook into your own pool on Uniswap Infinity, to capture high-quality trading users and relevant trading volume from centralized exchanges. Once the hook is bound to a designated pool (token pair), end users will find an external link on the Uniswap Infinity trade page. This link directs them through the data verification process using the [Primus zkTLS technique](https://docs.primuslabs.xyz/data-verification/tech-intro). Meanwhile, all sensitive information related to the generated proof—including total trading volume and account details—remains entirely confidential. Neither Primus nor the pool initiator will have access to this private data at any point during the process.
+As a pool initiator, you can invoke this hook into your own pool on Uniswap v4, to capture high-quality trading users and relevant trading volume from centralized exchanges. Once the hook is bound to a designated pool (token pair), end users will find an external link to create a zkTLS proof. This link directs them through the data verification process using the [Primus zkTLS technique](https://docs.primuslabs.xyz/data-verification/tech-intro). Meanwhile, all sensitive information related to the generated proof—including total trading volume and account details—remains entirely confidential. Neither Primus nor the pool initiator will have access to this private data at any point during the process.
 
 [//]: # (![image]&#40;./docs/pics/uniswapswapv4hookprocess.jpg&#41;)
 
