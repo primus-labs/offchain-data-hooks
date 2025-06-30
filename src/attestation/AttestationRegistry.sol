@@ -163,7 +163,8 @@ contract AttestationRegistry is Ownable, IAttestationRegistry {
         require(_attestation.recipient == msg.sender, "Invalid recipient");
         require(_attestation.reponseResolve.length == 1, "Invalid response resolve");
         string memory urlCheck = _attestation.additionParams.extractValue("requests[1].url");
-        require(urlCheck.equals(""), "too more url");
+        require(keccak256(bytes(urlCheck)) == keccak256(bytes("")), "too more url");
+
         // verify the attestation is valid
         primusZKTLS.verifyAttestation(_attestation);
         // verify the url is valid
